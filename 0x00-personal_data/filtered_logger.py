@@ -59,3 +59,16 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     database = getenv('PERSONAL_DATA_DB_NAME')
     return mysql.connector.connect(host=host, user=user,
                                    password=password, database=database)
+
+
+def main() -> None:
+    """do stuff"""
+    logger = get_logger()
+    cursor = get_db().cursor()
+    cursor.execute('SELECT * FROM users;')
+    rows = cursor.fetchall()
+    fields = [field[0] for field in cursor.description]
+    result = [dict(zip(fields, row)) for row in rows]
+    for user in result:
+        user_str = RedactingFormatter.SEPARATOR.join(f'{key}={value}' for key, value in user.items())
+        logger.info(user_str)
