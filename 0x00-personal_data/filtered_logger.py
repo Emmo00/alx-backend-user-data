@@ -73,6 +73,7 @@ def main() -> None:
         user_str = RedactingFormatter.SEPARATOR.join(
             f'{key}={value}' for key, value in user.items())
         logger.info(user_str)
+    cursor.close()
 
 
 if __name__ == '__main__':
