@@ -70,5 +70,10 @@ def main() -> None:
     fields = [field[0] for field in cursor.description]
     result = [dict(zip(fields, row)) for row in rows]
     for user in result:
-        user_str = RedactingFormatter.SEPARATOR.join(f'{key}={value}' for key, value in user.items())
+        user_str = RedactingFormatter.SEPARATOR.join(
+            f'{key}={value}' for key, value in user.items())
         logger.info(user_str)
+
+
+if __name__ == '__main__':
+    main()
