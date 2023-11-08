@@ -3,6 +3,7 @@
 """
 from .auth import Auth
 import base64
+from typing import TypeVar
 
 
 class BasicAuth(Auth):
@@ -43,3 +44,8 @@ class BasicAuth(Auth):
         if ':' not in decoded_base64_authorization_header:
             return None, None
         return tuple(decoded_base64_authorization_header.split(':'))
+    
+    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        """user object from credentials
+        """
+        pass
