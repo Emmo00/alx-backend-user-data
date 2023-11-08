@@ -31,7 +31,3 @@ class Auth:
         """current user
         """
         return None
-
-
-class BasicAuth(Auth):
-    pass
