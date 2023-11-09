@@ -2,8 +2,8 @@
 """Authentication module
 """
 from typing import List, TypeVar
-from flask import request
 import re
+from os import getenv
 
 
 class Auth:
@@ -36,3 +36,10 @@ class Auth:
         """current user
         """
         return None
+
+    def session_cookie(self, request=None):
+        """returns cookie value from a request
+        """
+        if request is None:
+            return None
+        return request.session.get(getenv('SESSION_NAME'))
