@@ -19,10 +19,9 @@ class Auth:
             return True
         if path in excluded_paths:
             return False
-        if '*' in path:
-            regex_path = path.replace('*', '.*')
-            for path in excluded_paths:
-                if re.search(regex_path, path):
+        for excluded_path in excluded_paths:
+            if '*' in excluded_path:
+                if re.search(path, excluded_path.replace('*', '.*')):
                     return False
         return True
 
