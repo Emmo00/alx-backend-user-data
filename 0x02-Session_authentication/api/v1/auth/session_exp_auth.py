@@ -3,7 +3,7 @@
 """
 from .session_auth import SessionAuth
 from os import getenv
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict
 
 
@@ -34,13 +34,15 @@ class SessionExpAuth(SessionAuth):
         """
         if session_id is None:
             return None
-        session_dict: Dict = self.__class__.user_id_by_session_id.get(session_id)
+        session_dict: Dict = self.__class__.\
+            user_id_by_session_id.get(session_id)
         if session_dict is None:
             return None
         if self.session_duration <= 0:
             return session_dict.get('user_id')
         if 'created_at' not in session_dict:
             return None
-        if session_dict.get('created_at') + self.session_duration > datetime.now():
+        if session_dict.get('created_at') + timedelta(seconds=self.session_duration) <\
+                datetime.now():
             return None
         return session_dict.get('user_id')
