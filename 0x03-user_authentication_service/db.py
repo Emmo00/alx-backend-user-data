@@ -70,7 +70,7 @@ class DB:
             for filter in kwargs:
                 if filter not in User.__dict__:
                     raise ValueError
-                user.__setattr__(filter, kwargs[filter])
+            self._session.query(User).filter(User.id == user.id).update(kwargs)
             self._session.add(user)
             self._session.commit()
         except NoResultFound:
