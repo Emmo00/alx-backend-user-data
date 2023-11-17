@@ -8,7 +8,7 @@ from db import DB, NoResultFound
 salt = bcrypt.gensalt()
 
 
-def _hash_password(password: str):
+def _hash_password(password: str) -> bytes:
     """return hashed password
     """
     return bcrypt.hashpw(password.encode(), salt)
