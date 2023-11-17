@@ -1,6 +1,7 @@
 # test file
 test.py
 main.py
+!0x03-user_authentication_service/main.py
 
 # temporary db files
 a.db
