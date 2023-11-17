@@ -2,6 +2,7 @@
 """auth module
 """
 import uuid
+from typing import TypeVar
 import bcrypt
 from db import DB, NoResultFound
 
@@ -14,7 +15,7 @@ def _hash_password(password: str) -> bytes:
     return bcrypt.hashpw(password.encode(), salt)
 
 
-def _generate_uuid():
+def _generate_uuid() -> str:
     """return new uuid string
     """
     return str(uuid.uuid4())
@@ -29,7 +30,7 @@ class Auth:
         """
         self._db = DB()
 
-    def register_user(self, email: str, password: str):
+    def register_user(self, email: str, password: str) -> TypeVar('User'):
         """register user
         """
         try:
