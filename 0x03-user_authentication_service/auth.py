@@ -36,6 +36,8 @@ class Auth:
         """
         if email is None or password is None:
             return None
+        if type(email) is not str or type(password) is not str:
+            return None
         try:
             user = self._db.find_user_by(email=email)
         except NoResultFound:
