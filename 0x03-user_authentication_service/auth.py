@@ -5,6 +5,7 @@ import uuid
 from typing import TypeVar
 import bcrypt
 from db import DB, NoResultFound
+from user import User
 
 salt = bcrypt.gensalt()
 
@@ -30,9 +31,11 @@ class Auth:
         """
         self._db = DB()
 
-    def register_user(self, email: str, password: str) -> TypeVar('User'):
+    def register_user(self, email: str, password: str) -> User:
         """register user
         """
+        if email is None or password is None:
+            return None
         try:
             user = self._db.find_user_by(email=email)
         except NoResultFound:
